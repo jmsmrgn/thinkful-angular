@@ -1,6 +1,7 @@
-var gulp = require('gulp'),
-    connect = require('gulp-connect'),
-    jshint = require('gulp-jshint');
+var gulp =        require('gulp'),
+    browserSync = require('browser-sync').create(),
+    jshint =      require('gulp-jshint'),
+    reload =      browserSync.reload;
 
 gulp.task('lint', function(){
   gulp.src(['./*.js'])
@@ -8,11 +9,20 @@ gulp.task('lint', function(){
     .pipe(jshint.reporter('default'));
 });
 
-gulp.task('connect', function() {
-  connect.server({
-    root: './app'
+gulp.task('sync', function() {
+  browserSync.init({
+    notify: false,
+    server: {
+        baseDir: "./app"
+    }
   });
 });
 
+gulp.task('watch', function() {
+  gulp.watch([
+    'app/**'
+  ]).on('change', reload);
+});
+
 // Default Task
-gulp.task('default', ['connect', 'lint']);
+gulp.task('default', ['sync', 'lint', 'watch']);
