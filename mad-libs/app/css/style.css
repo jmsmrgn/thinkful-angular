@@ -1,0 +1,33 @@
+body {
+  background-color: #cbcbcb;
+}
+.container {
+  margin-top: 50px;
+  border: 1px solid gray;
+  padding-bottom: 20px;
+  background-color: #fff;
+  max-width: 960px;
+}
+.input {
+  font-weight: bold;
+  border-bottom: 1px solid #ccc;
+  display: inline-block;
+  min-width: 80px;
+  text-align: center;
+}
+.happy-face {
+  max-width: 125px;
+  max-height: auto;
+}
+img {
+  padding: 10px 0px;
+}
+.form {
+  padding-bottom: 40px;
+}
+.madlib-content {
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 1px solid #ccc;
+  line-height: 30px;
+}
