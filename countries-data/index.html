@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script data-require="angular.js@1.4.1" data-semver="1.4.1" src="https://code.angularjs.org/1.4.1/angular.js"></script>
+  <script src="script.js"></script>
+</head>
+<body ng-app="myApp">
+  <h1>Challenge Three</h1>
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Country name</th>
+          <th>1960 pop</th>
+          <th>1970 pop</th>
+          <th>1980 pop</th>
+          <th>1990 pop</th>
+          <th>2000 pop</th>
+          <th>2010 pop</th>
+          <th>% growth (1960 - 2010)</th>
+        </tr>
+      </thead>
+      <tbody ng-controller="oneController">
+        <tr ng-repeat="country in countries | orderBy:'name'">
+          <td>{{country.name}}</td>
+          <td>{{country[1960] | number:0}}</td>
+          <td>{{country[1970] | number:0}}</td>
+          <td>{{country[1980] | number:0}}</td>
+          <td>{{country[1990] | number:0}}</td>
+          <td>{{country[2000] | number:0}}</td>
+          <td>{{country[2010] | number:0}}</td>
+          <td>{{((country[2010] - country[1960]) / country[1960]) * 100 | number:0}}%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
