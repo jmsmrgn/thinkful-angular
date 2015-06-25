@@ -9,13 +9,17 @@
   </head>
   <body>
     <div class="container">
-      <table class="table" ng-controller="multiplicationCtrl">
-        <tr ng-repeat="numberA in numbers">
-          <td ng-repeat="numberB in numbers">
-            {{ numberA * numberB }}
-          </td>
+      <div ng-controller="multiplicationCtrl" initial-number-limit="10">
+        <input type="number" string-to-number ng-model="numberLimit" placeholder="Enter a number">
+        <br><br>
+        <table class="table">
+          <tr ng-repeat="numberA in numbers()">
+            <td ng-repeat="numberB in numbers()">
+              {{ compute(numberA, numberB) }}
+            </td>
         </tr>
-      </table>
+        </table>
+      </div>
     </div>
 
     <!-- scripts -->
