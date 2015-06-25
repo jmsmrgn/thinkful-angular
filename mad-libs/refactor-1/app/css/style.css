@@ -4,7 +4,7 @@ body {
 .container {
   margin: 50px auto;
   border: 1px solid gray;
-  padding-bottom: 20px;
+  padding: 40px;
   background-color: #fff;
   max-width: 960px;
 }
@@ -22,10 +22,13 @@ body {
 img {
   padding: 10px 0px;
 }
-.form {
-  padding-bottom: 40px;
+.template {
+  opacity: 0.2;
 }
-.madlib-content {
+.template-enable {
+  opacity: 1;
+}
+.content {
   margin-top: 40px;
   padding-top: 40px;
   border-top: 1px solid #ccc;
