@@ -2,7 +2,7 @@ body {
   background-color: #cbcbcb;
 }
 .container {
-  margin-top: 50px;
+  margin: 50px auto;
   border: 1px solid gray;
   padding-bottom: 20px;
   background-color: #fff;
