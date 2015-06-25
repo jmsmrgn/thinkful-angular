@@ -4,7 +4,7 @@ var gulp =        require('gulp'),
     reload =      browserSync.reload;
 
 gulp.task('lint', function(){
-  gulp.src(['./app/js/*.js'])
+  gulp.src(['./app/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'))
     .pipe(jshint.reporter('fail'));
