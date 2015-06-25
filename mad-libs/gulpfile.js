@@ -4,9 +4,10 @@ var gulp =        require('gulp'),
     reload =      browserSync.reload;
 
 gulp.task('lint', function(){
-  gulp.src(['./*.js'])
+  gulp.src(['./app/js/*.js'])
     .pipe(jshint())
-    .pipe(jshint.reporter('default'));
+    .pipe(jshint.reporter('jshint-stylish'))
+    .pipe(jshint.reporter('fail'));
 });
 
 gulp.task('sync', function() {
