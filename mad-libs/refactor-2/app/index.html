@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app='myApp'>
+<html lang="en" ng-app="myApp" ng-controller="ctrl1">
   <head>
     <meta charset="UTF-8">
     <title>Mad Libs App: Refactor 2</title>
@@ -7,7 +7,7 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/style.css" rel="stylesheet" media="screen">
   </head>
-  <body ng-controller="whichVersion">
+  <body ng-controller="ctrl2">
     <div class="container">
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -19,24 +19,24 @@
               <img src="img/ng-mad-libs-logo.png">
             </div>
           </div>
-          <h2>Male or Female?</h2>
-          <div class="radio">
-            <label>
-              <input type="radio" value="male" ng-model="gender" ng-change="template(gender)">
-              Male
-            </label>
-          </div>
-          <div class="radio">
-            <label>
-              <input type="radio" value="female" ng-model="gender" ng-change="template(gender)">
-              Female
-            </label>
-          </div>
-          <br>
-          <div class="template">
+          <div class="user-inputs" ng-hide="hideForm && madForm.$valid">
+            <h2>Male or Female?</h2>
+            <div class="radio">
+              <label>
+                <input type="radio" value="male" ng-model="gender" ng-change="template(gender)">
+                Male
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" value="female" ng-model="gender" ng-change="template(gender)">
+                Female
+              </label>
+            </div>
+            <br>
             <h3>Please provide the following words:</h3>
             <br>
-            <form role="form">
+            <form role="form" name="form" ng-submit="submitted=true;submit()">
               <div class="row">
                 <div class="col-md-4">
                   <div class="form-group">
@@ -70,9 +70,13 @@
                   <div class="form-group">
                     <input type="text" class="form-control" placeholder="Huge Number" ng-model="huge_number">
                   </div>
+                  <br>
+                  <button type="submit" class="btn btn-lg btn-default submit-btn">Generate My Mad Lib</button>
                 </div>
               </div>
             </form>
+          </div>
+          <div class="template disabled" ng-show="hideForm && madForm.$valid">
             <h4 class="content male-version">
               <span class="input">{{ name }}</span> was a <span class="input">{{ job_title }}</span> who loved technology. Although he loved parts of his job, he absolutely hated  <span class="input">{{ tedious_task }}</span> and <span class="input">{{ dirty_task }}</span>. So, <span class="input">{{ name }}</span> met with his life mentor <span class="input">{{ celebrity }}</span> who told him to learn how to <span class="input">{{ useless_skill }}</span> with Thinkful. Thinkful didn't offer a course on <span class="input">{{ useless_skill }}</span> so he studied programming instead.</p>
 

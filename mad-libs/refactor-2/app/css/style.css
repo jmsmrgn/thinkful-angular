@@ -22,11 +22,11 @@ body {
 img {
   padding: 10px 0px;
 }
-.template {
-  opacity: 0.2;
+.disabled {
+  display: none;
 }
-.template-enable {
-  opacity: 1;
+.enabled {
+  display: block;
 }
 .content {
   margin-top: 40px;
