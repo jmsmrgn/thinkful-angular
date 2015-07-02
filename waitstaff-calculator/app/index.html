@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="myApp">
+<html lang="en" ng-app="waiterCalc">
   <head>
     <meta charset="UTF-8">
     <title>Waitstaff Calculator</title>
@@ -7,8 +7,8 @@
     <link href="//bootswatch.com/cerulean/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/style.css" rel="stylesheet" media="screen">
   </head>
-  <body ng-controller="myCtrl">
-    <div class="container">
+  <body>
+    <div class="container" ng-controller="myCtrl">
       <h1 class="text-center">Waitstaff Calculator</h1>
       <br>
       <div class="row">
@@ -19,38 +19,39 @@
                 <h3 class="panel-title">Enter the meal details</h3>
               </div>
               <div class="panel-body">
-                <form action="" class="form-horizontal">
+                <form class="form-horizontal" role="form" name="enterPriceForm" ng-submit="submitDetails()" novalidate>
                   <div class="form-group">
-                    <label class="col-sm-5 control-label" for="base">Base Meal Price: $</label>
+                    <label class="col-sm-5 control-label" for="mealPrice">Base Meal Price: $</label>
                     <div class="col-sm-7">
-                      <input id="base" class="form-control" type="number">
+                      <input class="form-control" ng-model="mealPrice" required min="0.01">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-sm-5 control-label" for="tax">Tax Rate: %</label>
+                    <label class="col-sm-5 control-label" for="taxRate">Tax Rate: %</label>
                     <div class="col-sm-7">
-                      <input id="tax" class="form-control" type="number">
+                      <input class="form-control" ng-model="taxRate" required min="1" max="100">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-sm-5 control-label" for="tip">Tip Percentage: %</label>
+                    <label class="col-sm-5 control-label" for="tipPercentage">Tip Percentage: %</label>
                     <div class="col-sm-7">
-                      <input id="tip" class="form-control" type="number">
+                      <input class="form-control" ng-model="tipPercentage" required min="1" max="100">
                     </div>
                   </div>
+                  <div class="error" ng-show="formError != ''">Please enter valid numbers</div>
                 </form>
               </div>
               <div class="panel-footer clearfix">
                 <div class="pull-right">
-                  <button class="btn btn-primary" type="submit">Submit</button>
-                  <button class="btn btn-primary" type="submit">Cancel</button>
+                  <button id="submit" class="btn btn-primary">Submit</button>
+                  <button id="cancel" class="btn btn-primary" ng-click="resetDetails()">Cancel</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div class="col-sm-5">
-          <div class="customer-chargers">
+          <div class="customer-charges">
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h3 class="panel-title">Custom Charges</h3>
@@ -62,7 +63,7 @@
                       <p class="subtotal">Subtotal:</p>
                     </div>
                     <div class="col-sm-5">
-                      <p></p>
+                      <p>{{subtotal | currency}}</p>
                     </div>
                   </div>
                   <div class="form-group">
@@ -70,7 +71,7 @@
                       <p class="subtotal">Tip:</p>
                     </div>
                     <div class="col-sm-5">
-                      <p></p>
+                      <p>{{tip | currency}}</p>
                     </div>
                   </div>
                   <hr>
@@ -79,14 +80,14 @@
                       <p class="subtotal">Total:</p>
                     </div>
                     <div class="col-sm-5">
-                      <p></p>
+                      <p>{{total | currency}}</p>
                     </div>
                   </div>
                 </form>
               </div>
             </div>
           </div>
-          <div class="customer-chargers">
+          <div class="earnings-info">
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h3 class="panel-title">My Earnings Info</h3>
@@ -98,7 +99,7 @@
                       <p class="subtotal">Tip Total:</p>
                     </div>
                     <div class="col-sm-5">
-                      <p></p>
+                      <p>{{tipTotal | currency}}</p>
                     </div>
                   </div>
                   <div class="form-group">
@@ -106,7 +107,7 @@
                       <p class="tip">Meal Count:</p>
                     </div>
                     <div class="col-sm-5">
-                      <p></p>
+                      <p>{{mealCount}}</p>
                     </div>
                   </div>
                   <hr>
@@ -115,7 +116,7 @@
                       <p class="total">Average Tip Per Meal:</p>
                     </div>
                     <div class="col-sm-5">
-                      <p></p>
+                      <p>{{avgTipPerMeal | currency}}</p>
                     </div>
                   </div>
                 </form>
@@ -124,7 +125,7 @@
           </div>
         </div>
       </div>
-      <button class="btn btn-default pull-right" type="submit">Reset</button>
+      <button class="btn btn-default pull-right" ng-click="init()">Reset</button>
     </div>
     <!-- scripts -->
     <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
