@@ -1,61 +1,38 @@
-var myApp = angular.module('waiterCalc', []);
+// Code goes here
+angular.module('waitStaff', [])
+  .controller('calcCtrl', function($scope){
 
-myApp.controller('myCtrl', ['$scope', function($scope){
-  $scope.resetDetails = function(){
-    $scope.mealPrice = '';
-    $scope.taxRate = '';
-    $scope.tipPercentage = '';
-  };
+    $scope.meal = [];
 
-  $scope.initCharges = function(){
-    $scope.subtotal = 0;
-    $scope.tip = 0;
-    $scope.total = 0;
-  };
+    $scope.submit = function(){
+      var currMeal = {
+        basePrice: '',
+        tax: '',
+        tipPerc: ''
+      };
+      $scope.meal.push();
 
-  $scope.initEarnings = function(){
-    $scope.tipTotal = 0;
-    $scope.mealCount = 0;
-  };
-
-  $scope.init = function(){
-    $scope.formError = "";
-    $scope.resetDetails();
-    $scope.initCharges();
-    $scope.initEarnings();
-  };
-
-  $scope.init();
-
-  $scope.submitDetails = function(){
-    if($scope.enterPriceForm.$invalid){
-      $scope.formError = "Please enter valid values ";
+      custCharges(currMeal);
+      calcEarnings(totalEarnings);
     }
-    else{
-      $scope.formError = "";
-      $scope.tipTotal += $scope.tip;
-      $scope.mealCount++;
-    }
-  };
 
-  $scope.$watchGroup(['mealPrice', 'taxRate', 'tipPercentage'], function(newValues, oldValues, scope) {
-    if($scope.enterPriceForm.$invalid){
-      $scope.initCharges();
+    function custCharges(currMeal){
+      //calculation here and update the data on the $scope
+      var charges = {
+        subtotal: currMeal.basePrice + currMeal.tax,
+        tip: charges.subtotal * currMeal.tipPerc,
+        total: charges.subtotal + charges.tip
+      };
+      $scope.custCharges = charges;
     }
-    else{
-      $scope.formError = "";
-      $scope.subtotal = $scope.mealPrice * (1 + $scope.taxRate/100);
-      $scope.tip = $scope.mealPrice * ($scope.tipPercentage/100);
-      $scope.total = $scope.subtotal + $scope.tip;
+
+    function calcEarnings(totalEarnings){
+      //calculation here and update the data on the $scope
+      var earnings = {
+        tipTotal: custCharges.tip++,
+        mealCount: mealcount++,
+        averageTip: tipTotal / mealCount
+      };
+      $scope.calcEarnings = earnings;
     }
   });
-
-  $scope.$watchGroup(['tipTotal', 'mealCount'], function(newValues, oldValues, scope) {
-    if($scope.mealCount != 0){
-      $scope.avgTipPerMeal = $scope.tipTotal/$scope.mealCount;
-    }
-    else{
-      $scope.avgTipPerMeal = 0;
-    }
-  });
-}]);
