@@ -1,38 +1,44 @@
 // Code goes here
 angular.module('waitStaff', [])
-  .controller('calcCtrl', function($scope){
+  .controller('CalcController', function($scope){
 
     $scope.meal = [];
+    var mealCount = 0;
+    var tipTotal = 0;
 
     $scope.submit = function(){
       var currMeal = {
         basePrice: '',
-        tax: '',
+        taxRate: '',
         tipPerc: ''
       };
       $scope.meal.push();
+      mealCount++;
+      tipTotal++;
 
       custCharges(currMeal);
-      calcEarnings(totalEarnings);
+      calcEarnings(calcEarnings);
     }
 
     function custCharges(currMeal){
-      //calculation here and update the data on the $scope
-      var charges = {
-        subtotal: currMeal.basePrice + currMeal.tax,
-        tip: charges.subtotal * currMeal.tipPerc,
-        total: charges.subtotal + charges.tip
+      var subtotal = $scope.meal.basePrice + ($scope.meal.basePrice * ($scope.meal.taxRate / 100));
+      var tip = subtotal * ($scope.meal.taxRate / 100);
+      var total = subtotal + tip;
+
+      $scope.custCharges = {
+        subtotal: subtotal,
+        tip: tip,
+        total: total
       };
-      $scope.custCharges = charges;
     }
 
-    function calcEarnings(totalEarnings){
-      //calculation here and update the data on the $scope
-      var earnings = {
-        tipTotal: custCharges.tip++,
-        mealCount: mealcount++,
-        averageTip: tipTotal / mealCount
+    function calcEarnings(meal) {
+      var avgTip = tipTotal / mealCount;
+
+      $scope.earnings = {
+        tipTotal: tipTotal,
+        mealCount: mealCount,
+        avgTip: avgTip
       };
-      $scope.calcEarnings = earnings;
     }
   });
