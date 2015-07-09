@@ -3,8 +3,8 @@ angular.module('waitStaff', [])
   .controller('CalcController', function($scope){
 
     $scope.meal = [];
-    var mealCount = 0;
-    var tipTotal = 0;
+    //var mealCount = 0;
+    //var tipTotal = 0;
 
     $scope.submit = function(){
       var currMeal = {
@@ -13,8 +13,8 @@ angular.module('waitStaff', [])
         tipPerc: ''
       };
       $scope.meal.push();
-      mealCount++;
-      tipTotal++;
+      //mealCount++;
+      //tipTotal++;
 
       custCharges(currMeal);
       calcEarnings(calcEarnings);
@@ -33,12 +33,12 @@ angular.module('waitStaff', [])
     }
 
     function calcEarnings(meal) {
-      var avgTip = tipTotal / mealCount;
+      //var avgTip = tipTotal / mealCount;
 
-      $scope.earnings = {
-        tipTotal: tipTotal,
-        mealCount: mealCount,
-        avgTip: avgTip
-      };
+      // $scope.earnings = {
+      //   tipTotal: tipTotal,
+      //   mealCount: mealCount,
+      //   avgTip: avgTip
+      // };
     }
   });
