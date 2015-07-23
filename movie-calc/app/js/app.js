@@ -1,5 +1,5 @@
 angular.module('movieCalc', [])
-  .controller('MovieController', function($scope){
+  .controller('MovieController', function($scope) {
     $scope.movie = {
       name: '',
       ticketPrice: ''
@@ -11,16 +11,7 @@ angular.module('movieCalc', [])
       var currMovie = angular.copy($scope.movie);
       $scope.movies.push(currMovie);
       $scope.movie = {};
-      $scope.list = listMovies($scope.movies.name);
       showSpending();
-    }
-
-    function listMovies() {
-      var movieList = 0;
-      for (var i = 0; i < $scope.movies.length; i++) {
-        movieList += $scope.movies[i].name;
-      }
-      return movieList;
     }
 
     function sumTickets() {
