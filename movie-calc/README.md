@@ -1,5 +1,5 @@
-## 1.3.6
+## Supplement to 1.3.6
 
-Waitstaff Calculator
+Movie Ticket Spending Tracker
 
 Run `npm install` then `gulp`
