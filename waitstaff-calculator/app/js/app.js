@@ -3,9 +3,9 @@ angular.module('waitStaff', [])
     window.$scope = $scope;
 
     $scope.meal = {
-      basePrice: 0,
-      taxRate: 0,
-      tipPerc: 0
+      basePrice: '',
+      taxRate: '',
+      tipPerc: ''
     }
     $scope.meals = [];
 
@@ -23,65 +23,46 @@ angular.module('waitStaff', [])
     }
     $scope.earningsTotals = [];
 
-    $scope.submit = function(){
+    $scope.submit = function() {
       var currMeal = angular.copy($scope.meal);
-      var meals = angular.copy($scope.meals);
+
+      $scope.meal = {};
 
       $scope.meals.push(currMeal);
 
       custCharges(currMeal);
 
-      calcEarnings(meals, currCustCharges);
-
-      resetMeal();
+      calcEarnings($scope.meals, $scope.currCustCharges);
     }
 
     function custCharges(currMeal) {
-      var currCustCharge = [
-        $scope.currCustCharge.subtotal = $scope.meal.basePrice + ($scope.meal.basePrice * ($scope.meal.taxRate / 100)),
-        $scope.currCustCharge.tip = $scope.currCustCharge.subtotal * ($scope.meal.tipPerc / 100),
-        $scope.currCustCharge.total = $scope.currCustCharge.subtotal + $scope.currCustCharge.tip
-      ];
+      $scope.currCustCharge.subtotal = currMeal.basePrice + (currMeal.basePrice * (currMeal.taxRate / 100));
+      $scope.currCustCharge.tip = $scope.currCustCharge.subtotal * (currMeal.tipPerc / 100);
+      $scope.currCustCharge.total = $scope.currCustCharge.subtotal + $scope.currCustCharge.tip;
 
-      currCustCharges = {
-        subtotal: currCustCharge[0],
-        tip: currCustCharge[1],
-        total: currCustCharge[2]
-      }
-
-      $scope.currCustCharges.push(currCustCharges);
+      $scope.currCustCharges.push(angular.copy($scope.currCustCharge));
     }
 
-    // Here i'm trying to iterate over the currCustCharges array and sum the tips - HELP!!
     function calcTips(currCustCharges) {
       var tipTotal = 0;
-      for (var i = 0; i < $scope.currCustCharges.length; i++) {
-        tipTotal += $scope.currCustCharges.tip[i];
+      for (var i = 0; i < currCustCharges.length; i++) {
+        tipTotal += currCustCharges[i].tip;
       }
       return tipTotal;
     }
-    // Seem to be stuck getting a value here to use below
-    var tips = calcTips();
 
     function calcEarnings(meals, currCustCharges) {
-      currEarnings = [
-        $scope.earnings.tipTotal = tips,
-        $scope.earnings.mealCount = $scope.meals.length,
-        $scope.earnings.avgTip = $scope.earnings.tipTotal / $scope.earnings.mealCount
-      ];
-
-      earningsTotals = {
-        tipTotal: currEarnings[0],
-        mealCount: currEarnings[1],
-        tipTotal: currEarnings[2]
-      }
-
-      $scope.earningsTotals.push(earningsTotals);
+      $scope.earnings.tipTotal = calcTips(currCustCharges);
+      $scope.earnings.mealCount = meals.length;
+      $scope.earnings.avgTip = $scope.earnings.tipTotal / $scope.earnings.mealCount;
     }
 
-    function resetMeal() {
-      $scope.meal.basePrice = 0;
-      $scope.meal.taxRate = 0;
-      $scope.meal.tipPerc = 0;
+    function resetAll() {
+      $scope.meal = {
+        basePrice: 0,
+        taxRate: 0,
+        tipPerc: 0
+      }
+      submit();
     }
   });

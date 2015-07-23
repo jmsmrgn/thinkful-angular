@@ -26,4 +26,4 @@ gulp.task('watch', function() {
 });
 
 // Default Task
-gulp.task('default', ['sync', 'watch']);
+gulp.task('default', ['sync', 'lint', 'watch']);
