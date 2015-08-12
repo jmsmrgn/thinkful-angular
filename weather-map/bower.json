@@ -1,0 +1,9 @@
+{
+  "name": "Open Weather Map App",
+  "version": "1.0",
+  "description": "Thinkful Angular Course - Lesson 2.1",
+  "dependencies": {
+    "angular": "~1.4.3",
+    "angular-route": "~1.4.3"
+  }
+}
