@@ -1,5 +1,20 @@
-angular.module('waitStaff', [])
-  .controller('CalcController', function($scope){
+angular.module('waitStaffApp', ['ngRoute'])
+  .config(['$routeProvider', function($routeProvider) {
+    $routeProvider.when('/', {
+      templateUrl : 'home.html'
+    })
+    .when('/new-meal', {
+      templateUrl : 'new-meal.html',
+      controller : 'WaitStaffCtrl'
+    })
+    .when('/my-earnings', {
+      templateUrl : 'my-earnings.html',
+      controller : 'WaitStaffCtrl'
+    })
+    .otherwise('/');
+  }])
+
+  .controller('WaitStaffCtrl', function($scope) {
     window.$scope = $scope;
 
     $scope.meal = {

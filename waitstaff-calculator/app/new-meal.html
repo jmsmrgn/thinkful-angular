@@ -1,0 +1,72 @@
+<div class="meal-details">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Enter the meal details</h3>
+    </div>
+    <div class="panel-body">
+      <form class="form-horizontal" name="mealDetails" ng-submit="mealDetails.$valid && submit()" novalidate>
+        <div class="form-group">
+          <label class="col-sm-5 control-label" for="basePrice">Base Meal Price: $</label>
+          <div class="col-sm-7">
+            <input class="form-control" name="basePrice" type="number" ng-model="meal.basePrice">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-5 control-label" for="taxRate">Tax Rate: %</label>
+          <div class="col-sm-7">
+            <input class="form-control" name="taxRate" type="number" ng-model="meal.taxRate">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-5 control-label" for="tipPerc">Tip Percentage: %</label>
+          <div class="col-sm-7">
+            <input class="form-control" name="tipPerc" type="number" ng-model="meal.tipPerc">
+          </div>
+        </div>
+        <div class="error" ng-show="mealDetails.amount.$invalid">Invalid</div>
+      </form>
+    </div>
+    <div class="panel-footer clearfix">
+      <div class="pull-right">
+        <button id="submit" class="btn btn-primary" ng-click="submit()">Submit</button>
+        <button id="cancel" class="btn btn-primary" ng-click="resetDetails()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="customer-charges">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Customer Charges</h3>
+    </div>
+    <div class="panel-body">
+      <form action="" class="form-horizontal">
+        <div class="form-group">
+          <div class="col-sm-7">
+            <p class="subtotal">Subtotal:</p>
+          </div>
+          <div class="col-sm-5">
+            <p>{{currCustCharge.subtotal | currency}}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-7">
+            <p class="subtotal">Tip:</p>
+          </div>
+          <div class="col-sm-5">
+            <p>{{currCustCharge.tip | currency}}</p>
+          </div>
+        </div>
+        <hr>
+        <div class="form-group">
+          <div class="col-sm-7">
+            <p class="subtotal">Total:</p>
+          </div>
+          <div class="col-sm-5">
+            <p>{{currCustCharge.total | currency}}</p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
