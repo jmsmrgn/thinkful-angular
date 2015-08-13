@@ -1,4 +1,4 @@
-var app = angular.module('weatherMap', ['ngRoute'])
+angular.module('weatherMap', ['ngRoute'])
   .value('appCities', ['New York', 'Dallas', 'Chicago'])
   .config(['$routeProvider', function($routeProvider){
     $routeProvider.when('/', {
